@@ -1,7 +1,7 @@
 import './style.css'
 import performWorkUntilDeadline from './reactSchedule'
 import { handleWork } from './tools'
-import taskModule from './task'
+const taskModule = new Array(5000).fill({ name: 'div', text: 'hello worldhello worldhello' })
 const mainEl = document.querySelector("#box")
 
 let temp
@@ -25,5 +25,5 @@ setInterval(() => {
 
 //卡顿模式
 // setInterval(() => {
-//     taskModule.taskQueue.forEach(i => handleWork(i))
+//     taskModule.forEach(i => handleWork(i))
 // }, 2000)

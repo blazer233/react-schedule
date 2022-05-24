@@ -1,20 +1,20 @@
-import taskModule from './task'
 import { getCurrentTime, yieldInterval, handleWork, } from './tools'
-const { taskQueue, pop } = taskModule
 let deadline = 0 //每一帧间隔剩余空闲时间
+const taskModule = new Array(5000).fill({ name: 'div', text: 'hello worldhello worldhello' })
+
 //当前帧剩余时间 = 当前帧结束时间(frameDeadline) - 当前帧花费的时间
 
 // 执行任务
 const scheduledHostCallback = (hasTimeRemaining) => {
     // 使用数组实现
-    while (taskQueue.length > 0) {
+    while (taskModule.length > 0) {
         // 如果真的该停了就不要中断
         if (!hasTimeRemaining || getCurrentTime() >= deadline) break
         // 依次执行
-        const task = pop(taskQueue)
+        const task = taskModule.pop()
         handleWork(task)
     }
-    if (taskQueue.length > 0) { // 数组模拟链表，继续节点执行
+    if (taskModule.length > 0) { // 数组模拟链表，继续节点执行
         return true
     } else {
         return false
